@@ -1,0 +1,14 @@
+{
+  "name": "copvoid",
+  "version": "1.0.0",
+  "description": "A secure messaging app for cops",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js --ignore 'client/'"
+  },
+  "author": "Naman Chhajed",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
