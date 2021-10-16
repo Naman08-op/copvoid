@@ -3,6 +3,8 @@
     USERNAME: <input type="text" v-model="username" /> <br/>
     
     PASSWORD: <input type="password" v-model="password" /> <br/>
+    Private Key: <input type="password" v-model="privateKey" /> <br/>
+    Public Key: <input type="password" v-model="publicKey" /> <br/>
     <button @click="signup">signup</button>
     {{ error }}
   </div>
@@ -15,6 +17,8 @@ export default {
     return {
       username: '',
       password: '',
+      privateKey:'',
+      publicKey:'',
       error: '',
     }
   },
@@ -22,9 +26,11 @@ export default {
     signup() {
       let newUser = {
         username: this.username,
-        password: this.password
+        password: this.password,
+        publicKey: this.publicKey,
+        privateKey: this.privateKey
       }
-      axios.post('http://localhost:3000/copvoid/signup', newUser)
+      axios.post('http://localhost:3000/cryptochat/signup', newUser)
         .then(res => {
           this.error = '';
           console.log(res.status)
