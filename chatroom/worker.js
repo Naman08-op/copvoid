@@ -1,7 +1,6 @@
 
-self.window = self // This is required for the jsencrypt library to work within the web worker
+self.window = self 
 
-// Import the jsencrypt library
 self.importScripts('https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js');
 self.importScripts('https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js');
 
@@ -9,7 +8,6 @@ let crypt = null
 let privateKey = null
 
 
-/** Webworker onmessage listener */
 onmessage = function(e) {
   const [ messageType, messageId, text,signature, key ] = e.data
   let result
@@ -26,15 +24,12 @@ onmessage = function(e) {
       break
   }
 
-  // Return result to the UI thread
   postMessage([ messageId, result ])
 }
 
-/** Generate and store keypair */
 function generateKeypair () {
   crypt = new JSEncrypt({default_key_size: 2056})
   privateKey = crypt.getPrivateKey()
-  // Only return the public key, keep the private key hidden
   return crypt.getPublicKey()
 }
 
