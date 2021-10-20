@@ -28,7 +28,7 @@
   <br/>
     {{ error }}
     <br/>
-    <input class="button is-link" @click="download" type="button" id="dwn-btn" value="Download dinamically generated key file"/>
+    <input class="button is-link" @click="download" type="button" id="dwn-btn" value="Download dynamically generated key file"/>
   </div>
 </template>
 <script>
