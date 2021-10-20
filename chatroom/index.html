@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Copvoid</title>
+    
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+  </head>
+  <body>
+    <div id="vue-instance">
+      <div class="chat-container full-width" ref="chatContainer">
+        <div class="message-list">
+          <div v-for="message in messages">
+            {{ getKeySnippet(message.sender) }} > {{ message.text }}
+          </div>
+        </div>
+      </div>
+      <div class="info-container full-width">
+        <div class="notification-list" ref="notificationContainer">
+          <h1>NOTIFICATION LOG</h1>
+          <div
+            class="notification full-width"
+            v-for="notification in notifications"
+          >
+            <div class="notification-timestamp">
+              {{ notification.timestamp }}
+            </div>
+            <div>{{ notification.message }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar full-width">
+        >
+        <input
+          class="message-input"
+          type="text"
+          placeholder="Message"
+          v-model="draft"
+          @keyup.enter="sendMessage()"
+        />
+      </div>
+    </div>
+    <style>
+      div {
+        box-sizing: border-box;
+      }
+      textarea:focus,
+      input:focus {
+        outline: none;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      #vue-instance {
+        display: flex;
+        flex-direction: row;
+        flex: 1 0 100%;
+        overflow-x: hidden;
+      }
+
+     
+      .chat-container {
+        flex: 0 0 60%;
+        word-wrap: break-word;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 6px;
+        margin-bottom: 50px;
+      }
+
+     
+      .info-container {
+        flex: 0 0 40%;
+        border-left: solid 1px var(--light-grey);
+        padding: 12px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin-bottom: 50px;
+        position: relative;
+        justify-content: space-around;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .notification-list {
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        padding-bottom: 24px;
+        flex: 1 0 40%;
+      }
+
+      .notification {
+        font-weight: 300;
+        font-size: small;
+        padding: 4px 0;
+        display: inline-flex;
+      }
+
+      .notification-timestamp {
+        flex: 0 0 20%;
+        padding-right: 12px;
+      }
+
+      .room-select {
+        display: flex;
+        min-height: 24px;
+        font-weight: 300;
+      }
+
+      #room-input {
+        flex: 0 0 60%;
+        background: none;
+        border: groove;
+        border-bottom: 1px solid var(--light-grey);
+        border-top: 1px solid var(--light-grey);
+        border-left: 1px solid var(--light-grey);
+        color: var(--light-grey);
+        padding: 4px;
+      }
+
+      
+      .message-input {
+        background: none;
+        border: none;
+        width: 90%;
+      }
+
+      .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 12px;
+        height: 48px;
+      }
+
+      .message-list {
+        margin-bottom: 40px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.1/immutable.min.js"></script>
+    <script src="/chat.js"></script>
+  </body>
+</html>
