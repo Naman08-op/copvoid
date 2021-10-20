@@ -17,12 +17,7 @@ onmessage = function(e) {
     case 'generate-keys':
       result = generateKeypair()
       break
-    case 'encrypt':
-      result = encrypt(text, key)
-      break
-    case 'decrypt':
-      result = decrypt(text)
-      break
+    
     case 'sign':
       result = sign(text)
       break
@@ -43,39 +38,9 @@ function generateKeypair () {
   return crypt.getPublicKey()
 }
 
-/** Encrypt the provided string with the destination public key */
-function encrypt (content, publicKey) {
-  crypt.setKey(publicKey)
-  return crypt.encrypt(content)
-}
 
-/** Decrypt the provided string with the local private key */
-function decrypt (content) {
-  crypt.setKey(privateKey)
-  return crypt.decrypt(content)
-}
 
-// function sign(content){
-//   var sig = new KJUR.crypto.Signature({"alg": "SHA1withRSA"});
-// sig.init(privateKey);
-// sig.updateString(content);
-// var signature=  sig.sign();
-// return signature;
-// }
 
-// function verify(content,signature,publicKey){
-//   var sig = new KJUR.crypto.Signature({"alg": "SHA1withRSA"});
-//   var sig2 = new KJUR.crypto.Signature({"alg": "SHA1withDSA"});
-//   sig2.init(publicKey);
-//   sig.updateString(content);
-//   var isValid=  sig2.verify(signature);
-//   if(isValid){
-//     return content;
-//   }
-//   else{
-//     return "Signature wasn't verified"
-//   }
-// }
 function sign(content){
   
   crypt.setPrivateKey(privateKey);
